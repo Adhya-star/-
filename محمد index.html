@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>معمل محمد للخياطة الرجالية | Diamond Tailoring</title>
+    <style>
+        /* أنماط ثلاثية الأبعاد متطورة */
+        :root {
+            --diamond-primary: linear-gradient(135deg, #1a1a1a, #2d2d2d, #1a1a1a);
+            --diamond-secondary: linear-gradient(135deg, #d4af37, #f9e076, #d4af37);
+            --diamond-accent: #8b4513;
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --text-gold: #d4af37;
+            --text-dark: #1a1a1a;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+        
+        /* تأثير الزجاج الشفاف */
+        .glass-panel {
+            background: var(--glass-effect);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        /* تأثيرات ثلاثية الأبعاد */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(3deg) translateY(-5px);
+        }
+        
+        /* أنماط متقدمة للعناصر */
+        .diamond-btn {
+            background: var(--diamond-secondary);
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+        
+        .diamond-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        
+        .diamond-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .diamond-btn.admin {
+            background: var(--diamond-primary);
+            color: var(--text-gold);
+            border: 1px solid var(--diamond-accent);
+        }
+        
+        /* تأثيرات متقدمة للإدخال */
+        .diamond-input {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid var(--diamond-accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .diamond-input:focus {
+            outline: none;
+            border-color: var(--diamond-secondary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* نظام طبقات متقدم */
+        .layer-1 { z-index: 10; }
+        .layer-2 { z-index: 20; }
+        .layer-3 { z-index: 30; }
+        
+        /* تأثيرات حركية */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* نظام الشبكات المتقدم */
+        .grid-system {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        /* تأثيرات النص المتقدمة */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        /* نظام الصفحات المتداخلة */
+        .nested-page {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+        
+        .nested-page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* نظام عرض التصاميم */
+        .design-card-3d {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(45, 45, 45, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--diamond-accent);
+        }
+        
+        .design-card-3d::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(212, 175, 55, 0.1),
+                rgba(212, 175, 55, 0)
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        
+        .design-card-3d:hover {
+            transform: translateY(-10px) rotateX(3deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* نظام التصاميم الفاخر */
+        .premium-design {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--diamond-accent);
+        }
+        
+        .premium-design::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(212, 175, 55, 0.2),
+                rgba(212, 175, 55, 0)
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        
+        /* نظام التأثيرات البصرية */
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* أنماط إضافية للتعديلات */
+        .design-image-preview {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--diamond-accent);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--diamond-accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .admin-only {
+            display: none;
+        }
+        
+        .logged-in .admin-only {
+            display: block;
+        }
+        
+        .design-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .design-actions button {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-gold);
+        }
+        
+        /* تأثيرات الذهب */
+        .gold-text {
+            color: var(--text-gold);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* شريط التنقل */
+        .main-header {
+            background: var(--diamond-primary);
+            padding: 20px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--text-gold), #f9e076, var(--text-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            max-width: 1400px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+        
+        /* قسم الترحيب */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px;
+            background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8));
+            border-radius: 15px;
+            border: 1px solid var(--diamond-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-gold);
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        /* قسم معرض التصاميم */
+        .designs-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-gold);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--diamond-secondary);
+            border-radius: 3px;
+        }
+        
+        /* قسم معرض الصور */
+        .gallery-section {
+            margin-bottom: 40px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .gallery-item .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* قسم الاتصال */
+        .contact-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(45, 45, 45, 0.8));
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--diamond-accent);
+            text-align: center;
+        }
+        
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--text-gold);
+            margin-bottom: 15px;
+        }
+        
+        .contact-card h3 {
+            color: var(--text-gold);
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--text-gold);
+        }
+        
+        /* حقوق المطور */
+        .credits {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(45, 45, 45, 0.8));
+            border-radius: 15px;
+            border: 1px solid var(--diamond-accent);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            }
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .welcome-section {
+                padding: 30px 20px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* صفحة اختيار الدور */
+        .role-selection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .role-card {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--diamond-accent);
+        }
+        
+        .role-card h2 {
+            color: var(--text-gold);
+            margin-bottom: 30px;
+        }
+        
+        .role-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- صفحة اختيار الدور -->
+    <div class="role-selection" id="roleSelection">
+        <div class="role-card">
+            <h2>مرحباً بك في نظام معمل محمد للخياطة الرجالية</h2>
+            <p>الرجاء اختيار دورك للدخول إلى النظام</p>
+            <div class="role-buttons">
+                <button onclick="selectRole('visitor')" class="diamond-btn">زائر</button>
+                <button onclick="selectRole('admin')" class="diamond-btn admin">مالك المعمل</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="main-header" id="mainHeader" style="display: none;">
+        <div class="header-content">
+            <div class="logo" id="site-name">معمل محمد للخياطة الرجالية</div>
+            <div class="admin-only">
+                <button onclick="showAdminPanel()" class="diamond-btn admin" style="margin-left: 10px;">لوحة التحكم</button>
+                <button onclick="logout()" class="diamond-btn admin">تسجيل خروج</button>
+            </div>
+            <button id="loginBtn" onclick="showLoginPanel()" class="diamond-btn" style="display: none;">دخول المالك</button>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للزوار -->
+    <main class="main-content" id="visitorContent" style="display: none;">
+        <!-- رسالة التنبيه -->
+        <div class="alert glass-panel" id="message-alert" style="display: none;"></div>
+        
+        <!-- قسم الترحيب -->
+        <section class="welcome-section glass-panel" id="welcome-section">
+            <h1 id="welcome-title">مرحباً بكم في معمل محمد للخياطة الرجالية</h1>
+            <p id="welcome-message">نقدم لكم أفضل تصاميم الخياطة الرجالية بجودة عالية وأناقة لا مثيل لها. خبرة تفوق 20 عاماً في صناعة الأناقة.</p>
+        </section>
+        
+        <!-- معرض التصاميم -->
+        <section class="designs-section">
+            <h2 class="section-title">أحدث تصاميمنا</h2>
+            <div class="grid-system" id="designsContainer">
+                <!-- سيتم ملء التصاميم ديناميكيًا -->
+            </div>
+        </section>
+        
+        <!-- معرض صور المعمل -->
+        <section class="gallery-section">
+            <h2 class="section-title">معرض المعمل</h2>
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- سيتم ملء الصور ديناميكيًا -->
+            </div>
+        </section>
+        
+        <!-- قسم الاتصال -->
+        <section class="contact-section glass-panel">
+            <h2 class="section-title">تواصل معنا</h2>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>اتصل بنا</h3>
+                    <p id="contactPhone">+966 50 123 4567</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>البريد الإلكتروني</h3>
+                    <p id="contactEmail">info@mohammed-tailoring.com</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>الموقع</h3>
+                    <p id="contactAddress">الرياض، المملكة العربية السعودية</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" id="whatsappLink"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="snapchatLink"><i class="fab fa-snapchat"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- المحتوى الرئيسي للمالك -->
+    <main class="main-content" id="adminContentPage" style="display: none;">
+        <!-- رسالة التنبيه -->
+        <div class="alert glass-panel" id="admin-message-alert" style="display: none;"></div>
+        
+        <!-- لوحة تحكم المالك -->
+        <section id="adminDashboard">
+            <h2 class="section-title">لوحة تحكم المالك</h2>
+            
+            <div class="grid-system" style="margin-bottom: 30px;">
+                <div class="glass-panel" style="padding: 20px; text-align: center;">
+                    <h4>إجمالي التصاميم</h4>
+                    <p style="font-size: 32px; font-weight: bold;" id="totalDesigns">0</p>
+                </div>
+                <div class="glass-panel" style="padding: 20px; text-align: center;">
+                    <h4>إجمالي الصور</h4>
+                    <p style="font-size: 32px; font-weight: bold;" id="totalGalleryItems">0</p>
+                </div>
+                <div class="glass-panel" style="padding: 20px; text-align: center;">
+                    <h4>طلبات العملاء</h4>
+                    <p style="font-size: 32px; font-weight: bold;" id="totalRequests">0</p>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                <div>
+                    <h3 style="color: var(--text-gold); margin-bottom: 20px;">إدارة التصاميم</h3>
+                    <button onclick="showAddDesignForm()" class="diamond-btn" style="width: 100%; margin-bottom: 15px;">إضافة تصميم جديد</button>
+                    <button onclick="showDesignsManagement()" class="diamond-btn" style="width: 100%;">عرض جميع التصاميم</button>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--text-gold); margin-bottom: 20px;">إدارة معرض الصور</h3>
+                    <button onclick="showAddGalleryItemForm()" class="diamond-btn" style="width: 100%; margin-bottom: 15px;">إضافة صورة جديدة</button>
+                    <button onclick="showGalleryManagement()" class="diamond-btn" style="width: 100%;">عرض جميع الصور</button>
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="color: var(--text-gold); margin-bottom: 20px;">إعدادات الموقع</h3>
+                <button onclick="showSettingsAdmin()" class="diamond-btn" style="width: 100%;">تعديل إعدادات الموقع</button>
+            </div>
+        </section>
+        
+        <!-- قسم إدارة التصاميم -->
+        <section id="designsManagement" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 class="section-title">إدارة التصاميم</h2>
+                <button onclick="backToDashboard()" class="diamond-btn admin">العودة للوحة التحكم</button>
+            </div>
+            
+            <div class="grid-system" id="adminDesignsContainer">
+                <!-- سيتم ملء التصاميم ديناميكيًا -->
+            </div>
+        </section>
+        
+        <!-- قسم إدارة معرض الصور -->
+        <section id="galleryManagement" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 class="section-title">إدارة معرض الصور</h2>
+                <button onclick="backToDashboard()" class="diamond-btn admin">العودة للوحة التحكم</button>
+            </div>
+            
+            <div class="gallery-grid" id="adminGalleryContainer">
+                <!-- سيتم ملء الصور ديناميكيًا -->
+            </div>
+        </section>
+        
+        <!-- قسم إعدادات الموقع -->
+        <section id="settingsAdmin" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 class="section-title">إعدادات الموقع</h2>
+                <button onclick="backToDashboard()" class="diamond-btn admin">العودة للوحة التحكم</button>
+            </div>
+            
+            <div class="glass-panel" style="padding: 30px;">
+                <form id="settingsForm">
+                    <h3 style="color: var(--text-gold); margin-bottom: 20px;">معلومات الموقع</h3>
+                    
+                    <div class="form-group">
+                        <label for="systemName">اسم المعمل</label>
+                        <input type="text" id="systemName" class="diamond-input" style="width: 100%;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="welcomeTitle">عنوان الترحيب</label>
+                        <input type="text" id="welcomeTitle" class="diamond-input" style="width: 100%;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="welcomeMessage">رسالة الترحيب</label>
+                        <textarea id="welcomeMessage" class="diamond-input" style="width: 100%; min-height: 100px;"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="backgroundImage">صورة الخلفية (رابط URL)</label>
+                        <input type="text" id="backgroundImage" class="diamond-input" style="width: 100%;">
+                        <button type="button" onclick="previewBackground()" class="diamond-btn" style="margin-top: 10px; padding: 8px 15px;">معاينة الصورة</button>
+                    </div>
+                    
+                    <h3 style="color: var(--text-gold); margin-bottom: 20px; margin-top: 30px;">معلومات التواصل</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactPhone">رقم الهاتف</label>
+                            <input type="text" id="contactPhone" class="diamond-input" style="width: 100%;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">البريد الإلكتروني</label>
+                            <input type="email" id="contactEmail" class="diamond-input" style="width: 100%;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactAddress">العنوان</label>
+                        <input type="text" id="contactAddress" class="diamond-input" style="width: 100%;">
+                    </div>
+                    
+                    <h3 style="color: var(--text-gold); margin-bottom: 20px; margin-top: 30px;">وسائل التواصل الاجتماعي</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="whatsappLink">رابط الواتساب</label>
+                            <input type="text" id="whatsappLink" class="diamond-input" style="width: 100%;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="instagramLink">رابط الإنستغرام</label>
+                            <input type="text" id="instagramLink" class="diamond-input" style="width: 100%;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="twitterLink">رابط تويتر</label>
+                            <input type="text" id="twitterLink" class="diamond-input" style="width: 100%;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="snapchatLink">رابط سناب شات</label>
+                            <input type="text" id="snapchatLink" class="diamond-input" style="width: 100%;">
+                        </div>
+                    </div>
+                    
+                    <button type="button" onclick="saveSettings()" class="diamond-btn" style="width: 100%; margin-top: 30px;">حفظ الإعدادات</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- لوحة تسجيل الدخول -->
+    <div id="loginSystem" class="nested-page glass-panel" style="width: 400px; padding: 40px; display: none;">
+        <h2 style="text-align: center; margin-bottom: 30px; font-size: 28px; color: var(--text-gold);">دخول المالك</h2>
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px;">اسم المستخدم</label>
+            <input type="text" id="adminUsername" class="diamond-input" style="width: 100%;" placeholder="أدخل اسم المستخدم">
+        </div>
+        <div class="form-group" style="margin-bottom: 30px;">
+            <label style="display: block; margin-bottom: 8px;">كلمة المرور</label>
+            <input type="password" id="adminPassword" class="diamond-input" style="width: 100%;" placeholder="أدخل كلمة المرور">
+        </div>
+        <button onclick="adminLogin()" class="diamond-btn" style="width: 100%;">دخول</button>
+        <button onclick="hideLoginPanel()" class="diamond-btn admin" style="width: 100%; margin-top: 15px;">إلغاء</button>
+    </div>
+
+    <!-- نموذج عرض التصميم -->
+    <div id="designModal" class="nested-page" style="width: 700px; background: linear-gradient(135deg, #2d2d2d, #1a1a1a); color: white; border-radius: 15px; overflow: hidden; border: 1px solid var(--diamond-accent); display: none;">
+        <div style="background: var(--diamond-primary); padding: 20px; text-align: center; color: var(--text-gold); border-bottom: 1px solid var(--diamond-accent);">
+            <h2 style="font-size: 24px;">تفاصيل التصميم</h2>
+        </div>
+        
+        <div style="padding: 30px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                <div>
+                    <p><strong>رقم الطلب:</strong> <span id="designNumber"></span></p>
+                    <p><strong>نوع التصميم:</strong> <span id="designTypeDetail"></span></p>
+                    <p><strong>تاريخ التسليم:</strong> <span id="designDate"></span></p>
+                    <p><strong>حالة الطلب:</strong> <span id="designStatus"></span></p>
+                </div>
+                <div>
+                    <p><strong>اسم العميل:</strong> <span id="designClient"></span></p>
+                    <p><strong>رقم الهاتف:</strong> <span id="designPhone"></span></p>
+                    <p><strong>الميزانية:</strong> <span id="designBudget"></span></p>
+                    <p><strong>تاريخ الطلب:</strong> <span id="designOrderDate"></span></p>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-gold); margin-bottom: 10px;">تفاصيل الطلب:</h3>
+                <p id="designDetailsText" style="background: rgba(26, 26, 26, 0.7); padding: 15px; border-radius: 8px; border: 1px solid var(--diamond-accent);"></p>
+            </div>
+            
+            <div style="text-align: center;">
+                <button onclick="printDesign()" class="diamond-btn" style="margin-right: 10px;">طباعة التفاصيل</button>
+                <button onclick="closeDesignModal()" class="diamond-btn admin">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج إضافة/تعديل تصميم -->
+    <div id="designFormModal" class="nested-page glass-panel" style="width: 700px; max-height: 90vh; overflow-y: auto; display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2 style="font-size: 24px; color: var(--text-gold);" id="designFormTitle">إضافة تصميم جديد</h2>
+            <button onclick="hideDesignForm()" class="diamond-btn admin">إغلاق</button>
+        </div>
+        
+        <form id="designForm" onsubmit="saveDesign(event)">
+            <input type="hidden" id="designId">
+            
+            <div class="form-group">
+                <label for="designTitle">عنوان التصميم</label>
+                <input type="text" id="designTitle" class="diamond-input" required style="width: 100%;">
+            </div>
+            
+            <div class="form-group">
+                <label for="designDescription">وصف التصميم</label>
+                <textarea id="designDescription" class="diamond-input" required style="width: 100%; min-height: 100px;"></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="designCategory">تصنيف التصميم</label>
+                    <select id="designCategory" class="diamond-input" required style="width: 100%;">
+                        <option value="suit">بدلات</option>
+                        <option value="jacket">جاكتات</option>
+                        <option value="pants">بناطيل</option>
+                        <option value="shirt">قمصان</option>
+                        <option value="custom">مخصص</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="designPrice">السعر التقريبي (ر.س)</label>
+                    <input type="number" id="designPrice" class="diamond-input" required style="width: 100%;" min="0">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="designImage">صورة التصميم (رابط URL)</label>
+                <input type="text" id="designImage" class="diamond-input" style="width: 100%;" placeholder="https://example.com/image.jpg">
+                <button type="button" onclick="previewDesignImage()" class="diamond-btn" style="margin-top: 10px; padding: 8px 15px;">معاينة الصورة</button>
+            </div>
+            
+            <div class="form-group">
+                <label>معاينة الصورة</label>
+                <img id="designImagePreview" class="design-image-preview" src="https://via.placeholder.com/600x400?text=صورة+التصميم" alt="معاينة صورة التصميم">
+            </div>
+            
+            <button type="submit" class="diamond-btn" style="width: 100%; margin-top: 20px;">حفظ التصميم</button>
+        </form>
+    </div>
+
+    <!-- نموذج إضافة/تعديل صورة للمعرض -->
+    <div id="galleryFormModal" class="nested-page glass-panel" style="width: 700px; max-height: 90vh; overflow-y: auto; display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2 style="font-size: 24px; color: var(--text-gold);" id="galleryFormTitle">إضافة صورة للمعرض</h2>
+            <button onclick="hideGalleryForm()" class="diamond-btn admin">إغلاق</button>
+        </div>
+        
+        <form id="galleryForm">
+            <input type="hidden" id="galleryItemId">
+            
+            <div class="form-group">
+                <label for="galleryImageTitle">عنوان الصورة</label>
+                <input type="text" id="galleryImageTitle" class="diamond-input" required style="width: 100%;">
+            </div>
+            
+            <div class="form-group">
+                <label for="galleryImageDescription">وصف الصورة</label>
+                <textarea id="galleryImageDescription" class="diamond-input" style="width: 100%; min-height: 100px;"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="galleryImageUpload">رفع صورة</label>
+                <input type="file" id="galleryImageUpload" class="diamond-input" accept="image/*" style="width: 100%; padding: 10px;">
+                <button type="button" onclick="previewGalleryImage()" class="diamond-btn" style="margin-top: 10px; padding: 8px 15px;">معاينة الصورة</button>
+            </div>
+            
+            <div class="form-group">
+                <label>معاينة الصورة</label>
+                <img id="galleryImagePreview" class="design-image-preview" src="https://via.placeholder.com/600x400?text=صورة+المعرض" alt="معاينة صورة المعرض">
+            </div>
+            
+            <button type="button" onclick="saveGalleryItem()" class="diamond-btn" style="width: 100%; margin-top: 20px;">حفظ الصورة</button>
+        </form>
+    </div>
+
+    <!-- حقوق المطور -->
+    <footer class="credits" id="mainFooter" style="display: none;">
+        تم التطوير بـ ❤️ بواسطة <span>ضياء الحق عمرو عبدالله الزراعي</span>
+    </footer>
+
+    <script>
+        // قاعدة بيانات النظام
+        let db = {
+            designs: [
+                {
+                    id: 'design1',
+                    title: 'بدلة كلاسيكية سوداء',
+                    description: 'بدلة رجالية كلاسيكية من الصوف الإيطالي بجودة عالية',
+                    category: 'suit',
+                    price: 2500,
+                    image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+                    featured: true
+                },
+                {
+                    id: 'design2',
+                    title: 'جاكت جلد طبيعي',
+                    description: 'جاكت جلد طبيعي بتصميم عصري وأنيق',
+                    category: 'jacket',
+                    price: 1800,
+                    image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+                    featured: true
+                },
+                {
+                    id: 'design3',
+                    title: 'بنطال رسمي رمادي',
+                    description: 'بنطال رسمي من القماش الإيطالي الفاخر',
+                    category: 'pants',
+                    price: 800,
+                    image: 'https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+                    featured: true
+                }
+            ],
+            gallery: [
+                {
+                    id: 'gallery1',
+                    title: 'ورشة العمل',
+                    description: 'صورة لورشة العمل لدينا حيث نصنع أفضل التصاميم',
+                    image: 'https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 'gallery2',
+                    title: 'أحدث التصاميم',
+                    description: 'مجموعة من أحدث تصاميمنا لعام 2023',
+                    image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 'gallery3',
+                    title: 'عملائنا الكرام',
+                    description: 'بعض من عملائنا الكرام مع تصاميمهم الجديدة',
+                    image: 'https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+                }
+            ],
+            requests: [],
+            settings: {
+                systemName: 'معمل محمد للخياطة الرجالية',
+                adminUsername: 'admin',
+                adminPassword: 'admin123',
+                welcomeTitle: 'مرحباً بكم في معمل محمد للخياطة الرجالية',
+                welcomeMessage: 'نقدم لكم أفضل تصاميم الخياطة الرجالية بجودة عالية وأناقة لا مثيل لها. خبرة تفوق 20 عاماً في صناعة الأناقة.',
+                backgroundImage: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+                contactPhone: '+966 50 123 4567',
+                contactEmail: 'info@mohammed-tailoring.com',
+                contactAddress: 'الرياض، المملكة العربية السعودية',
+                whatsappLink: '#',
+                instagramLink: '#',
+                twitterLink: '#',
+                snapchatLink: '#',
+                currency: 'ر.س'
+            }
+        };
+
+        // تحميل البيانات من localStorage
+        function loadDatabase() {
+            const savedDb = localStorage.getItem('tailoringSystemDB');
+            if (savedDb) {
+                db = JSON.parse(savedDb);
+                updateUI();
+            }
+        }
+
+        // حفظ البيانات إلى localStorage
+        function saveDatabase() {
+            localStorage.setItem('tailoringSystemDB', JSON.stringify(db));
+            updateUI();
+        }
+
+        // تحديث واجهة المستخدم
+        function updateUI() {
+            // تحديث الإعدادات
+            document.getElementById('site-name').textContent = db.settings.systemName;
+            document.getElementById('welcome-title').textContent = db.settings.welcomeTitle;
+            document.getElementById('welcome-message').textContent = db.settings.welcomeMessage;
+            document.body.style.backgroundImage = `url('${db.settings.backgroundImage}')`;
+            
+            // تحديث معلومات التواصل
+            document.getElementById('contactPhone').textContent = db.settings.contactPhone;
+            document.getElementById('contactEmail').textContent = db.settings.contactEmail;
+            document.getElementById('contactAddress').textContent = db.settings.contactAddress;
+            
+            // تحديث التصاميم
+            renderDesigns();
+            renderGallery();
+            
+            // تحديث لوحة التحكم
+            updateAdminDashboard();
+        }
+
+        // عرض التصاميم للزوار
+        function renderDesigns() {
+            const designsContainer = document.getElementById('designsContainer');
+            if (designsContainer) {
+                designsContainer.innerHTML = db.designs.filter(design => design.featured).map(design => `
+                    <div class="design-card-3d">
+                        <img src="${design.image}" alt="${design.title}" class="design-image-preview">
+                        <h3>${design.title}</h3>
+                        <p>${design.description}</p>
+                        <p>السعر التقريبي: ${design.price} ${db.settings.currency}</p>
+                        <button onclick="showDesignDetails('${design.id}')" class="diamond-btn" style="width: 100%; margin-top: 15px;">تفاصيل التصميم</button>
+                    </div>
+                `).join('');
+            }
+            
+            const adminDesignsContainer = document.getElementById('adminDesignsContainer');
+            if (adminDesignsContainer) {
+                adminDesignsContainer.innerHTML = db.designs.map(design => `
+                    <div class="design-card-3d">
+                        <img src="${design.image}" alt="${design.title}" class="design-image-preview">
+                        <h3>${design.title}</h3>
+                        <p>${design.description}</p>
+                        <p>التصنيف: ${getCategoryName(design.category)}</p>
+                        <p>السعر: ${design.price} ${db.settings.currency}</p>
+                        <div class="design-actions">
+                            <button onclick="editDesign('${design.id}')" class="diamond-btn" style="background: var(--diamond-accent); padding: 8px 15px;">تعديل</button>
+                            <button onclick="deleteDesign('${design.id}')" class="diamond-btn" style="padding: 8px 15px;">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // عرض معرض الصور
+        function renderGallery() {
+            const galleryContainer = document.getElementById('galleryContainer');
+            if (galleryContainer) {
+                galleryContainer.innerHTML = db.gallery.map(item => `
+                    <div class="gallery-item">
+                        <img src="${item.image}" alt="${item.title}" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            const adminGalleryContainer = document.getElementById('adminGalleryContainer');
+            if (adminGalleryContainer) {
+                adminGalleryContainer.innerHTML = db.gallery.map(item => `
+                    <div class="design-card-3d">
+                        <img src="${item.image}" alt="${item.title}" class="design-image-preview">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <div class="design-actions">
+                            <button onclick="editGalleryItem('${item.id}')" class="diamond-btn" style="background: var(--diamond-accent); padding: 8px 15px;">تعديل</button>
+                            <button onclick="deleteGalleryItem('${item.id}')" class="diamond-btn" style="padding: 8px 15px;">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // تحديث لوحة التحكم
+        function updateAdminDashboard() {
+            document.getElementById('totalDesigns').textContent = db.designs.length;
+            document.getElementById('totalGalleryItems').textContent = db.gallery.length;
+            document.getElementById('totalRequests').textContent = db.requests.length;
+        }
+
+        // اختيار الدور (زائر أو مالك)
+        function selectRole(role) {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('mainHeader').style.display = 'flex';
+            document.getElementById('mainFooter').style.display = 'block';
+            
+            if (role === 'visitor') {
+                document.getElementById('visitorContent').style.display = 'block';
+                document.getElementById('loginBtn').style.display = 'block';
+            } else if (role === 'admin') {
+                document.getElementById('loginSystem').style.display = 'block';
+                showLoginPanel();
+            }
+        }
+
+        // تسجيل دخول المالك
+        function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === db.settings.adminUsername && password === db.settings.adminPassword) {
+                document.body.classList.add('logged-in');
+                hideLoginPanel();
+                document.getElementById('visitorContent').style.display = 'none';
+                document.getElementById('adminContentPage').style.display = 'block';
+                showAlert('تم تسجيل الدخول بنجاح!', 'success');
+            } else {
+                showAlert('اسم المستخدم أو كلمة المرور غير صحيحة!', 'error');
+            }
+        }
+
+        // تسجيل خروج المالك
+        function logout() {
+            document.body.classList.remove('logged-in');
+            document.getElementById('visitorContent').style.display = 'block';
+            document.getElementById('adminContentPage').style.display = 'none';
+            showAlert('تم تسجيل الخروج بنجاح!', 'success');
+        }
+
+        // عرض لوحة تسجيل الدخول
+        function showLoginPanel() {
+            document.getElementById('loginSystem').classList.add('active');
+        }
+
+        // إخفاء لوحة تسجيل الدخول
+        function hideLoginPanel() {
+            document.getElementById('loginSystem').classList.remove('active');
+        }
+
+        // عرض نموذج إضافة تصميم
+        function showAddDesignForm() {
+            document.getElementById('designFormTitle').textContent = 'إضافة تصميم جديد';
+            document.getElementById('designForm').reset();
+            document.getElementById('designId').value = '';
+            document.getElementById('designImagePreview').src = 'https://via.placeholder.com/600x400?text=صورة+التصميم';
+            document.getElementById('designFormModal').style.display = 'block';
+            document.getElementById('designFormModal').classList.add('active');
+        }
+
+        // عرض نموذج تعديل تصميم
+        function editDesign(designId) {
+            const design = getDesignById(designId);
+            if (!design) return;
+            
+            document.getElementById('designFormTitle').textContent = 'تعديل التصميم';
+            document.getElementById('designId').value = design.id;
+            document.getElementById('designTitle').value = design.title;
+            document.getElementById('designDescription').value = design.description;
+            document.getElementById('designCategory').value = design.category;
+            document.getElementById('designPrice').value = design.price;
+            document.getElementById('designImage').value = design.image;
+            document.getElementById('designImagePreview').src = design.image || 'https://via.placeholder.com/600x400?text=صورة+التصميم';
+            
+            document.getElementById('designFormModal').style.display = 'block';
+            document.getElementById('designFormModal').classList.add('active');
+        }
+
+        // إخفاء نموذج التصميم
+        function hideDesignForm() {
+            document.getElementById('designFormModal').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('designFormModal').style.display = 'none';
+            }, 300);
+        }
+
+        // حفظ التصميم
+        function saveDesign(e) {
+            e.preventDefault();
+            
+            const designId = document.getElementById('designId').value;
+            const isNew = !designId;
+            
+            const design = {
+                id: isNew ? 'design' + Date.now() : designId,
+                title: document.getElementById('designTitle').value,
+                description: document.getElementById('designDescription').value,
+                category: document.getElementById('designCategory').value,
+                price: parseFloat(document.getElementById('designPrice').value),
+                image: document.getElementById('designImage').value,
+                featured: true
+            };
+            
+            if (isNew) {
+                db.designs.push(design);
+            } else {
+                const index = db.designs.findIndex(d => d.id === designId);
+                if (index !== -1) {
+                    db.designs[index] = design;
+                }
+            }
+            
+            saveDatabase();
+            hideDesignForm();
+            showAlert(`تم ${isNew ? 'إضافة' : 'تعديل'} التصميم بنجاح!`, 'success');
+        }
+
+        // حذف تصميم
+        function deleteDesign(designId) {
+            if (!confirm('هل أنت متأكد من حذف هذا التصميم؟')) {
+                return;
+            }
+            
+            db.designs = db.designs.filter(design => design.id !== designId);
+            saveDatabase();
+            showAlert('تم حذف التصميم بنجاح!', 'success');
+        }
+
+        // عرض تفاصيل التصميم
+        function showDesignDetails(designId) {
+            const design = getDesignById(designId);
+            if (!design) return;
+            
+            document.getElementById('designNumber').textContent = design.id;
+            document.getElementById('designTypeDetail').textContent = getCategoryName(design.category);
+            document.getElementById('designDate').textContent = 'يحدد لاحقاً';
+            document.getElementById('designStatus').textContent = 'متاح';
+            document.getElementById('designClient').textContent = 'عميل جديد';
+            document.getElementById('designPhone').textContent = 'يحدد لاحقاً';
+            document.getElementById('designBudget').textContent = design.price + ' ' + db.settings.currency;
+            document.getElementById('designOrderDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('designDetailsText').textContent = design.description;
+            
+            document.getElementById('designModal').style.display = 'block';
+            document.getElementById('designModal').classList.add('active');
+        }
+
+        // إغلاق نموذج التصميم
+        function closeDesignModal() {
+            document.getElementById('designModal').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('designModal').style.display = 'none';
+            }, 300);
+        }
+
+        // طباعة تفاصيل التصميم
+        function printDesign() {
+            const printContent = document.getElementById('designModal').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+
+        // عرض إدارة التصاميم
+        function showDesignsManagement() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('designsManagement').style.display = 'block';
+            document.getElementById('galleryManagement').style.display = 'none';
+            document.getElementById('settingsAdmin').style.display = 'none';
+        }
+
+        // عرض إدارة معرض الصور
+        function showGalleryManagement() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('designsManagement').style.display = 'none';
+            document.getElementById('galleryManagement').style.display = 'block';
+            document.getElementById('settingsAdmin').style.display = 'none';
+        }
+
+        // عرض إعدادات الموقع
+        function showSettingsAdmin() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('designsManagement').style.display = 'none';
+            document.getElementById('galleryManagement').style.display = 'none';
+            document.getElementById('settingsAdmin').style.display = 'block';
+            
+            // تعبئة نموذج الإعدادات
+            document.getElementById('systemName').value = db.settings.systemName;
+            document.getElementById('welcomeTitle').value = db.settings.welcomeTitle;
+            document.getElementById('welcomeMessage').value = db.settings.welcomeMessage;
+            document.getElementById('backgroundImage').value = db.settings.backgroundImage;
+            document.getElementById('contactPhone').value = db.settings.contactPhone;
+            document.getElementById('contactEmail').value = db.settings.contactEmail;
+            document.getElementById('contactAddress').value = db.settings.contactAddress;
+            document.getElementById('whatsappLink').value = db.settings.whatsappLink;
+            document.getElementById('instagramLink').value = db.settings.instagramLink;
+            document.getElementById('twitterLink').value = db.settings.twitterLink;
+            document.getElementById('snapchatLink').value = db.settings.snapchatLink;
+        }
+
+        // العودة إلى لوحة التحكم
+        function backToDashboard() {
+            document.getElementById('adminDashboard').style.display = 'block';
+            document.getElementById('designsManagement').style.display = 'none';
+            document.getElementById('galleryManagement').style.display = 'none';
+            document.getElementById('settingsAdmin').style.display = 'none';
+        }
+
+        // حفظ إعدادات الموقع
+        function saveSettings() {
+            db.settings = {
+                systemName: document.getElementById('systemName').value,
+                adminUsername: db.settings.adminUsername,
+                adminPassword: db.settings.adminPassword,
+                welcomeTitle: document.getElementById('welcomeTitle').value,
+                welcomeMessage: document.getElementById('welcomeMessage').value,
+                backgroundImage: document.getElementById('backgroundImage').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                contactAddress: document.getElementById('contactAddress').value,
+                whatsappLink: document.getElementById('whatsappLink').value,
+                instagramLink: document.getElementById('instagramLink').value,
+                twitterLink: document.getElementById('twitterLink').value,
+                snapchatLink: document.getElementById('snapchatLink').value,
+                currency: db.settings.currency
+            };
+            
+            saveDatabase();
+            showAlert('تم حفظ الإعدادات بنجاح!', 'success');
+        }
+
+        // معاينة صورة الخلفية
+        function previewBackground() {
+            const bgUrl = document.getElementById('backgroundImage').value;
+            if (bgUrl) {
+                document.body.style.backgroundImage = `url('${bgUrl}')`;
+            }
+        }
+
+        // معاينة صورة التصميم
+        function previewDesignImage() {
+            const imgUrl = document.getElementById('designImage').value;
+            if (imgUrl) {
+                document.getElementById('designImagePreview').src = imgUrl;
+            }
+        }
+
+        // عرض نموذج إضافة صورة للمعرض
+        function showAddGalleryItemForm() {
+            document.getElementById('galleryFormTitle').textContent = 'إضافة صورة للمعرض';
+            document.getElementById('galleryForm').reset();
+            document.getElementById('galleryItemId').value = '';
+            document.getElementById('galleryImagePreview').src = 'https://via.placeholder.com/600x400?text=صورة+المعرض';
+            document.getElementById('galleryFormModal').style.display = 'block';
+            document.getElementById('galleryFormModal').classList.add('active');
+        }
+
+        // عرض نموذج تعديل صورة للمعرض
+        function editGalleryItem(itemId) {
+            const item = db.gallery.find(i => i.id === itemId);
+            if (!item) return;
+            
+            document.getElementById('galleryFormTitle').textContent = 'تعديل صورة المعرض';
+            document.getElementById('galleryItemId').value = item.id;
+            document.getElementById('galleryImageTitle').value = item.title;
+            document.getElementById('galleryImageDescription').value = item.description;
+            document.getElementById('galleryImagePreview').src = item.image;
+            
+            document.getElementById('galleryFormModal').style.display = 'block';
+            document.getElementById('galleryFormModal').classList.add('active');
+        }
+
+        // إخفاء نموذج معرض الصور
+        function hideGalleryForm() {
+            document.getElementById('galleryFormModal').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('galleryFormModal').style.display = 'none';
+            }, 300);
+        }
+
+        // معاينة صورة المعرض
+        function previewGalleryImage() {
+            const fileInput = document.getElementById('galleryImageUpload');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('galleryImagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        // حفظ صورة المعرض
+        function saveGalleryItem() {
+            const itemId = document.getElementById('galleryItemId').value;
+            const isNew = !itemId;
+            
+            const title = document.getElementById('galleryImageTitle').value;
+            const description = document.getElementById('galleryImageDescription').value;
+            
+            // في هذا المثال البسيط، سنستخدم رابط الصورة المباشر
+            // في تطبيق حقيقي، يجب رفع الصورة إلى الخادم والحصول على رابط دائم لها
+            const imageUrl = document.getElementById('galleryImagePreview').src;
+            
+            if (!title) {
+                showAlert('يرجى إدخال عنوان للصورة!', 'error');
+                return;
+            }
+            
+            const item = {
+                id: isNew ? 'gallery' + Date.now() : itemId,
+                title: title,
+                description: description,
+                image: imageUrl
+            };
+            
+            if (isNew) {
+                db.gallery.push(item);
+            } else {
+                const index = db.gallery.findIndex(i => i.id === itemId);
+                if (index !== -1) {
+                    db.gallery[index] = item;
+                }
+            }
+            
+            saveDatabase();
+            hideGalleryForm();
+            showAlert(`تم ${isNew ? 'إضافة' : 'تعديل'} الصورة بنجاح!`, 'success');
+        }
+
+        // حذف صورة من المعرض
+        function deleteGalleryItem(itemId) {
+            if (!confirm('هل أنت متأكد من حذف هذه الصورة؟')) {
+                return;
+            }
+            
+            db.gallery = db.gallery.filter(item => item.id !== itemId);
+            saveDatabase();
+            showAlert('تم حذف الصورة بنجاح!', 'success');
+        }
+
+        // الحصول على تصميم بواسطة ID
+        function getDesignById(designId) {
+            return db.designs.find(design => design.id === designId) || {};
+        }
+
+        // الحصول على اسم التصنيف
+        function getCategoryName(category) {
+            const categories = {
+                'suit': 'بدلة',
+                'jacket': 'جاكت',
+                'pants': 'بنطال',
+                'shirt': 'قميص',
+                'custom': 'مخصص'
+            };
+            return categories[category] || category;
+        }
+
+        // إظهار رسالة تنبيه
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('message-alert') || document.getElementById('admin-message-alert');
+            alert.textContent = message;
+            alert.className = `alert glass-panel ${type}`;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // تهيئة النظام عند التحميل
+        function initSystem() {
+            loadDatabase();
+            
+            // أحداث لوحة التحكم
+            document.getElementById('loginBtn')?.addEventListener('click', showLoginPanel);
+            
+            // أحداث معاينة الصور
+            document.getElementById('designImage')?.addEventListener('input', function() {
+                const preview = document.getElementById('designImagePreview');
+                if (this.value) {
+                    preview.src = this.value;
+                } else {
+                    preview.src = 'https://via.placeholder.com/600x400?text=صورة+التصميم';
+                }
+            });
+        }
+
+        // تشغيل النظام عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', initSystem);
+    </script>
+</body>
+</html>
